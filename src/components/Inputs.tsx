@@ -1,37 +1,38 @@
 import {useForm} from "react-hook-form"
 import React, {useState} from 'react';
+import Result from "./Result";
 function Input() {
-   const {register, handleSubmit, formState: { errors} } = useForm({
-      defaultValues: {
-         Name:"",
+    const [formValues, setFormValues] = useState()
+   const {register, handleSubmit,  } = useForm({
+     defaultValues: {
+         Name: "",
          Email:"",
-         Password:"",
+         Password: ""
       }
    })
-    console.log(errors)
-    const [formValues, setFormValues] = useState();
-
-
-
-
+   const onSubmit = data => setFormValues(data) 
+   
 return (
- <form onSubmit={handleSubmit((data) => setFormValues(formValues))}>
-
-     <input required {...register("Name", {minLength: 3, required: "name needs to be atleast 3 letters long"})} 
+<div>
+ <form onSubmit={handleSubmit(onSubmit)}>
+    
+     <input type="text" {...register("Name", {minLength: 3, required: true, maxLength: 20 })} 
      placeholder="Name" />
-     <p>{errors?.Name?.message}</p>
+
         
-     <input required  {...register("Email" )} 
+     <input   type="text" required  {...register("Email", {required: true, pattern: /^\S+@\S+$/i} )} 
         placeholder="Email" />
         
-     <input {...register("Password", { minLength: 8, required: "Password need to be atleast 8 letters long"})} 
+     <input type="password" {...register("Password", { minLength: 8, required: true, maxLength: 20 })} 
         placeholder="Password" />
-       <p>{errors?.Password?.message}</p>
+       
 
      <input type="submit"/>
  </form>
-   
+ <Result data={formValues}/>
+ </div>  
 )
+
 }
 
 export default Input

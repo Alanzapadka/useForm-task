@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-
-import Registeration from './components/Registeration.tsx';
+import Registeration from './components/Registeration';
 
 function App() {
   return (
-    <form>
+  
       <Registeration/>
-    </form>
+
   );
 }
 

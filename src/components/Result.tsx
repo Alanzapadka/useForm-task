@@ -1,12 +1,13 @@
 import React from "react";
-import Registeration from "./Registeration.tsx"
-
-function Result(){
-
+function Result(props){ 
+  console.log(props)
 return(
-    <form>
-  <Registeration/>
-  </form>
+<div >
+  
+  {props.Name}
+  {props.Email}
+  {props.password}
+ </div>
 )
 
 
