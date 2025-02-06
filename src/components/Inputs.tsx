@@ -1,6 +1,6 @@
 import {useForm} from "react-hook-form"
 import React, {useState} from 'react';
-import Result from "./Result";
+import Result from "./Result.tsx";
 function Input() {
     const [formValues, setFormValues] = useState()
    const {register, handleSubmit,  } = useForm({
@@ -28,8 +28,9 @@ return (
        
 
      <input type="submit"/>
+     <Result data={formValues}/>
  </form>
- <Result data={formValues}/>
+ 
  </div>  
 )
 
