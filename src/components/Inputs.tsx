@@ -1,30 +1,39 @@
 import {useForm} from "react-hook-form"
-import React from 'react';
-
-interface IFormInput{
-    Name: string,
-    Email: string,
-    Password: string
-}
-
+import React, {useState} from 'react';
+import Result from "./Result.tsx";
 function Input() {
-    const {register} = useForm<IFormInput>()
-    
-    return (
-        <form>
-    <input {...register("Name", {minLength: {value: 3, message: "min length is 3"}, 
-    required: "This input is required"}, )} placeholder="Name" 
-    />
-    <input {...register("Email", {required: "This input is required"}, )} placeholder="Email" 
-    />
-     <input {...register("Email", {required: "This input is required", minLength: {value: 8, message: "min length is 8"}}, )} placeholder="Password" 
-    />
- </form>
+    const [formValues, setFormValues] = useState()
+   const {register, handleSubmit,  } = useForm({
+     defaultValues: {
+         Name: "",
+         Email:"",
+         Password: ""
+      }
+   })
+   const onSubmit = data => setFormValues(data) 
    
+return (
+<div>
+ <form onSubmit={handleSubmit(onSubmit)}>
+    
+     <input type="text" {...register("Name", {minLength: 3, required: true, maxLength: 20 })} 
+     placeholder="Name" />
 
+        
+     <input   type="text" required  {...register("Email", {required: true, pattern: /^\S+@\S+$/i} )} 
+        placeholder="Email" />
+        
+     <input type="password" {...register("Password", { minLength: 8, required: true, maxLength: 20 })} 
+        placeholder="Password" />
+       
 
-
+     <input type="submit"/>
+     <Result data={ formValues }/>
+ </form>
+ 
+ </div>  
 )
+
 }
 
 export default Input
