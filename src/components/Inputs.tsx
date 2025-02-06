@@ -28,7 +28,7 @@ return (
        
 
      <input type="submit"/>
-     <Result data={formValues}/>
+     <Result data={ formValues }/>
  </form>
  
  </div>  
